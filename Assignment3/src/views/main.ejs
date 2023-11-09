@@ -1,0 +1,29 @@
+<html lang="en">
+    <head>
+        <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+        <meta charset="utf-8">
+        <title>Employees List</title>
+        <link href="/css/styles.css" rel="stylesheet">
+    </head>
+    <body>
+        <div class="container">
+            <div>
+                <h3><%=title%></h3>
+            </div>
+            <hr />
+            <div>
+                <%for(let i=0; i<result.length;i++){%>
+                    <div style="margin:10px">    
+                        <div>
+                            <h5 class="card-title">Name: <%=result[i].name%></h5>
+                            <p class="card-text">
+                                    <p>Id: <%=result[i].id%></p>
+                                    <p>CreatedAt: <%=result[i].createdAt%></p>
+                            </p>
+                        </div>
+                    </div>
+                <%}%>
+            <div>
+        </div>
+    </body>
+</html>
