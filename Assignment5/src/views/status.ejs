@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en" >
+    <head>
+		<title>Status Form</title>
+		<link href="css/styles.css" rel="stylesheet">
+    </head>
+    <body>
+        <table>
+            <thead>
+                <th>Name</th>
+                <th>Email</th>
+                <th>Address</th>
+                <th>Product</th>
+                <th>Price</th>
+                <th>Quantity</th>
+            </thead>
+            <tbody>
+                <%for(let i=0; i<data.length;i++){%>
+                    <tr>
+                        <td><%=data[i].name%></td>
+                        <td><%=data[i].email%></td>
+                        <td><%=data[i].address%></td>
+                        <td><%=data[i].productName%></td>
+                        <td><%=data[i].productPrice%></td>
+                        <td><%=data[i].quantity%></td>
+                        <td style="border-radius: 2px;" bgcolor="#2574a8" >
+                            <a href="/sendEmail/<%= data[i].email %>" target="_blank" style="margin-left: 10px; border-radius: 12px;font-size: 14px; color: #ffffff;font-weight:bold;display: inline-block;">
+                            Send Email             
+                            </a>
+                        </td>
+                    </tr>
+                <%}%>
+            </tbody>
+        </table>
+    </body>
+</html>

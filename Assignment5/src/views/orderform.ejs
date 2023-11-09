@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en" >
+    <head>
+		<title>Order Form</title>
+		<link href="css/styles.css" rel="stylesheet">
+    </head>
+    <body>
+        <form action="/postOrder" method="POST">
+            <div class="form-group">
+                <div>
+                    <label for="name" >NAME</label>
+                    <input type="text" name="name" class="form-control"/>
+                </div>
+                <div>
+                    <label for="email" >EMAIL</label>
+                    <input type="email" name="email" class="form-control"/>
+                </div>
+                <div>
+                    <label for="address">ADDRESS</label>
+                    <input type="text" name="address" class="form-control"/>
+                </div>
+            </div>
+
+            <hr />
+
+            <div class="form-group">
+                <div>
+                    <label for="productNname" >Product Name</label>
+                    <input type="text" name="productNname" class="form-control"/>
+                </div>
+                <div>
+                    <label for="productPrice" >Price</label>
+                    <input type="text" name="productPrice" class="form-control"/>
+                </div>
+                <div>
+                    <label for="quantity" >Quantity</label>
+                    <input type="text" name="quantity" class="form-control"/>
+                </div>
+                
+            </div>
+            <hr />
+            <div>
+                <button type="submit">SUBMIT</button>
+                <button type="reset">RESET</button>
+            </div>
+            
+        </form>
+
+    </body>
+</html>
