@@ -1,0 +1,83 @@
+1. Add 5 moviestothe collection,every movie document should include thefollowing properties: name, genre, rating (out of 10)and language
+Query: 
+
+ db.movies.insertMany([
+    {
+     "name": "MEG",
+     "genre": "Adventure",
+     "language": "ENGLISH",
+     "rating": 9.2,
+     },
+     {
+     "name": "The Godfather",
+     "genre": "Action",
+     "language": "ENGLISH",
+     "rating": 9.2,
+     },
+     {
+     "name": "MEG 2",
+     "genre": "Adventure",
+     "language": "ENGLISH",
+     "rating": 8.2,
+     },
+     {
+     "name": "The Shawshank Redemption",
+     "genre": "Drama",
+     "language": "ENGLISH",
+     "rating": 9.2,
+     },
+     {
+     "name": "The Dark Knight",
+     "genre": "Action",
+     "language": "ENGLISH",
+     "rating": 9.2,
+     },
+ ])
+
+
+2. Write a query that returns all themovies
+Query:
+
+ db.movies.find()
+
+
+
+
+3. Write a query to find amovie nameusing findOne method (Donot use limit() method)
+Query:
+  db.movies.findOne({"name" : "MEG"})
+
+
+
+
+4. Write a query that returns the threehighest ratingd movies
+Query:
+ db.movies.find().sort({"rating" : -1}).limit(3)
+
+
+
+5. Add a key called achievements in any two documents. One document should have ‘Super hit’ and other should have ‘Super Duper Hit’ as value to key achievements. This task should be performed in two ways-i.Using update() method ii.Using save() methodHint: For save, you have to query the object andstore it in a variable first
+Query:
+ 
+ db.movies.update({"name" : "The Dark Knight"},{$set: {"achievements" : "Super hit" }})
+ db.movies.save( { "_id" : ObjectId("6540c21fae36e7bad6a9793c"),
+    "name": "The Shawshank Redemption",
+    "genre": "Drama",
+    "language": "ENGLISH",
+    "rating": 9.2,
+    "achievements" : "Super Duper Hit"}
+    )
+
+
+
+6. Write a query that returns all the movies that have boththe ‘Super hit’ and the ‘SuperDuperhit’’ achievements
+Query:
+
+ db.movies.find({"achievements" : { $in: ["Super hit", "Super Duper Hit"] }})
+
+
+
+
+7. Write a query that returns only those movies that have achievement
+Query:
+ db.movies.find( { "achievements": { $exists: true } } )
