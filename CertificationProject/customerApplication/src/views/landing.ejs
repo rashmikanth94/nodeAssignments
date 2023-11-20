@@ -6,7 +6,10 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
     <link href="/css/styles.css" rel="stylesheet">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <script src="/socket.io/socket.io.js"></script>
+    <script src="chatBox.js"></script>
 </head>
 <body>
 
@@ -66,32 +69,102 @@
                     <span class="trackerItem"></span>           
             </div>
         </div>
-        <div class="newsTopics">
-            <div class="individualNews"><%=news[0].title%></div>
-            <div class="individualNews"> <%=news[1].title%></div>
-            <div class="individualNews"><%=news[2].title%></div>
-        </div>
-        <div class="newsContent">
-            <div class="news">
-                <%=news[0].description%> 
-            </div>
-            <div class="news" style="display: none;">
-                <%=news[1].description%> 
-            </div>
-            <div class="news" style="display: none;">
-                <%=news[2].description%> 
-            </div>
-        </div>
 
+        <div class="row" style="border-bottom: 1px solid gray; margin-bottom: 30px;">
+            <div class="col-7">
+                <div class="newsContent my-2 mx-4">
+                    <div class="news">
+                        <div class="newsTitle"><%=news[0].title%></div>
+                        <div>
+                            <%=news[0].description%> 
+                        </div>
+                    </div>
+                    <div class="news" style="display: none;">
+                        <div class="newsTitle"> <%=news[1].title%></div>
+                        <div>
+                            <%=news[1].description%> 
+                        </div>
+                    </div>
+                    <div class="news" style="display: none;">
+                        <div class="newsTitle"><%=news[2].title%></div>
+                        <div>
+                            <%=news[2].description%> 
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-5" style="border-left: 1px solid grey;">
+                <div class="panel">
+                    <div class="panel-body">
+                        <div style="font-size: 24px; font-weight: bold;" class="mb-4">
+                                Group Chat
+                        </div>
+                         <div class="panel panel-info">
+                            <div class="panel-body">
+                                <form >
+                                    <div class="form-group">
+                                        <div style="display: inline-flex;" class="pb-2">
+                                            <input id="nickText"  type="text" class="form-control" placeholder="Enter your Nickname" style="width:300px;">
+                                            <button type="button" class="btn btn-primary ml-2" id="nick">Join</button>
+                                        </div>
+                                        <div>
+                                            <textarea style="font-size: 12px; height:300px; width:400px; border: 1px solid gray;"></textarea>
+
+                                        </div>
+                                           
+                                        <hr />
+                                        <p>
+                                            <input id="chatText" type="text" style="padding: 5px; width:400px;border: 1px solid gray;" />
+                                            <button type="button" class="btn btn-primary ml-2" id="chat">Send Message</button>
+
+                                        </p>
+                                        
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>  
+            </div>
+        </div>
     </div>
 
-    <div class="chatbox">
-        Hello
-    </div>
+    <!-- <div class="">
+        <div class="col-md-4"> 
+            <div class="panel">
+            <div class="panel-body">
+                <center>
+                    <h5></h5>
+                    <h6 style="color: white; text-shadow: 1px 1px 2px black, 0 0 25px blue, 0 0 5px darkblue;">
+                        Group Chat
+                    </h6>
+                </center>
+                 <div class="panel panel-info">
+                    <div class="panel-body">
+                        <form >
+                            <div class="form-group" style="box-shadow: 10px 10px 5px darkkhaki;">
+                                <p>
+                                    <input id="nickText"  type="text" class="form-control" placeholder="Nickname" aria-label="Username" aria-describedby="basic-addon1">
+                                    <button type="button" class="btn btn-primary" id="nick">Join</button>
+                                </p>
+                                <textarea style="font-size: 12px; height:300px; width:100%; border: 1px solid purple;"></textarea>
+                                <hr />
+                                <p>
+                                    <input id="chatText" type="text" style="padding: 5px; width:100%;border: 2px solid green;" />
+                                    <button id="chat" style="padding: 5px; color: yellow; background-color: black">Send Chat Message</button>
+                                </p>
+                                
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+            </div>                              
+            </div> 
+           </div> -->
 
-    <div class="footer">
-        copyRight 2023
-
+    <div class="footer mt-5">
+        © 2023 News Application
     </div>
 <script>
     var slideIndex = 0;
@@ -107,7 +180,7 @@
             trackers[slideIndex].style.backgroundColor = 'white';
             trackers[slideIndex - 1].style.backgroundColor = 'gray';
             newsCont[slideIndex].style.display = "none";
-            newsCont[slideIndex - 1].style.display = "flex";
+            newsCont[slideIndex - 1].style.display = "block";
             slideIndex--;
         }
     }
@@ -118,7 +191,7 @@
             trackers[slideIndex].style.backgroundColor = 'white';
             trackers[slideIndex + 1].style.backgroundColor = 'gray';
             newsCont[slideIndex].style.display = "none";
-            newsCont[slideIndex + 1].style.display = "flex";
+            newsCont[slideIndex + 1].style.display = "block";
             slideIndex++;
         }
     }

@@ -2,8 +2,9 @@ const app = require('./app');
 const express = require('express');
 const request = require('request');
 const axios = require('axios');
-
-
+import path from 'path'
+import http from 'http'
+import cors from 'cors'
 
 const port = 4000;
 const url = 'https://api.openweathermap.org/data/2.5/weather?lat=17.38&lon=78.48&appid=52184e83b46f4e6cdaff3d729f23365e';
@@ -16,22 +17,21 @@ app.use(bodyParser.json())
 app.use(express.static(__dirname+'/public'));
 app.set('view engine', 'ejs');
 app.set('views', './src/views');
+app.set('port', 9902);
 
-const server = app.listen(port, () => {
-  console.log('Express server listening on port ' + port);
-});
 
 require('./db')
 const News = require('./models/newsModel')
 const Contactuslist = require('./models/contactUsModel')
 
+app.use(cors())
 
 app.get("/", (req, res)=> {
   request(url, (err, response, body)=> {
       if(err){
           console.log(err);
       } else {
-          output = JSON.parse(body);
+          const output = JSON.parse(body);
           const weather = {
             description: output.weather[0].main,
             icon: "http://openweathermap.org/img/w/" + output.weather[0].icon + ".png",
@@ -49,7 +49,6 @@ app.get("/", (req, res)=> {
               news
           })
   })
-          // res.render("landing", {weather:weather});
       }
   })
 
@@ -59,7 +58,7 @@ app.get("/", (req, res)=> {
   })
 
   app.get('/contactUs', (req, res)=> {
-    res.render("contactUs");
+    res.render("contactUs",{message:req.query.message?req.query.message:''})
   })
 
   app.get('/sports', (req,res)=>{
@@ -80,7 +79,6 @@ app.get("/", (req, res)=> {
         })
         .then( (response)=>{
             const data = response.data.articles
-            console.log("/sports : data => ", data)
             res.render('sports', {data})
         })
         .catch(function (error) {
@@ -89,19 +87,61 @@ app.get("/", (req, res)=> {
 })
 
   app.post('/submitForm', (req, res)=> {
-    console.log(req.body);
     
     const record = req.body
     Contactuslist.create(record  , (err, data) => {
             if(err){
-                const htmlMsg = encodeURIComponent('Error : ', error);
-                res.redirect('/contactUs/?msg=' + htmlMsg)
+                const message = encodeURIComponent('Error : ', error);
+                res.redirect('/contactUs/?message=' + message)
             }else{
-                const htmlMsg = encodeURIComponent('ContactUs Message Saved OK !');
-                res.redirect('/contactUs/?msg=' + htmlMsg)
+                const htmlMsg = encodeURIComponent('Query Submitted Succesfully!');
+                res.redirect('/contactUs/?message=' + message)
             }
             
         }) 
-    // res.render("contactUs");
   })
 })
+
+const server = http.createServer(app).listen(app.get('port'), () => {
+  console.log("Express server listening on port " + app.get('port'));
+});
+
+const io = require('socket.io').listen(server);
+
+let users = []
+
+io.on('connection',  (socket) => {
+
+  socket.on('connect', ()=>{
+      console.log("New connection socket.id : ", socket.id)
+  })
+
+  socket.on('disconnect', ()=>{
+      console.log("disconnect => nickname : ", socket.nickname)
+      const updatedUsers = users.filter(user => user != socket.nickname)
+      console.log("updatedUsers : ", updatedUsers)
+      users = updatedUsers
+      io.emit('userlist', users)
+  })
+
+  // nick event
+  socket.on('nick', (nickname) => {
+      console.log("nick => nickname : ", nickname)
+      socket.nickname = nickname
+      users.push(nickname)
+
+      console.log("server : users : ", users)
+      io.emit('userlist', users);
+  });
+
+  // chat event
+  socket.on('chat', (data) => {
+      console.log("chat => nickname : ", socket.nickname)
+      const d = new Date()
+      const ts = d.toLocaleString()
+      console.log("ts : ", ts)
+      const response = `${ts} : ${socket.nickname} : ${data.message}`
+      console.log("rs : ", response)
+      io.emit('chat', response)
+  });
+});

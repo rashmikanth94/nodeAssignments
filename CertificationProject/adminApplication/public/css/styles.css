@@ -7,11 +7,27 @@
 .navBar li {
     list-style: none;
     cursor: pointer;
+    padding-right: 20px;
+}
+
+a {
+    color: white !important;
+    text-decoration: none !important;
+}
+
+a:hover {
+    color:rgb(153, 153, 154) !important;
 }
 
 .navBar ol {
     display: inline-flex;
-    justify-content: space-between;
+    justify-content: start;
     width: 100%;
     padding-right: 35px;
+}
+
+
+.linkHide {
+    color:white;
+    text-decoration: none;
 }

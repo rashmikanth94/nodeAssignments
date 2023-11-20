@@ -1,5 +1,5 @@
 .navBar {
-    background-color: black;
+    background-color: rgb(43, 48, 53);;
     color:white;
     padding-top: 18px;
 }
@@ -7,13 +7,23 @@
 .navBar li {
     list-style: none;
     cursor: pointer;
+    padding-right: 20px;
 }
 
 .navBar ol {
     display: inline-flex;
-    justify-content: space-between;
+    justify-content: start;
     width: 100%;
     padding-right: 35px;
+}
+
+a {
+    color: white !important;
+    text-decoration: none !important;
+}
+
+a:hover {
+    color:rgb(153, 153, 154) !important;
 }
 
 .weatherReport {
@@ -74,7 +84,7 @@
 .footer {
     width:100%;
     height:50px;
-    background-color: black;
+    background-color: rgb(43, 48, 53);;
     color:white;
     position: fixed;
     bottom: 0;
@@ -123,4 +133,9 @@
 
 .active {
     background-color: gray;
+}
+
+.newsTitle {
+    font-size: 25px;
+    font-weight: bold;
 }

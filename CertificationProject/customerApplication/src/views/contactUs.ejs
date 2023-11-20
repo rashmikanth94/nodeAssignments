@@ -23,35 +23,48 @@
             <li><a href="/contactUs">Contact Us</a></li>
         </ol>
     </div>
-    <div class="d-flex justify-content-center">
+    <% if(message.length){ %>
+    <div class="alert alert-info alertMesage" role="alert" id="msg1">
+        <div class="d-flex justify-content-center">
+            <%=message%>
+        </div>
+    </div>
+    <% } %>
+    <div class="d-flex justify-content-start ml-4">
         <form method="POST" action="/submitForm">
             <div  class="form-group mt-4" style="width:700px">
-                <div>
+                <div class="pb-2">
                     <label>Name:</label>
                     <input class="form-control" name="name">
                 </div>
 
-            <div>
+            <div class="pb-2">
                 <label>Email:</label>
                 <input class="form-control" name="email">
             </div>
-            <div>
+            <div class="pb-2">
                 <label>Query:</label>
                 <input class="form-control" name="query">
             </div>
             </div>
 
-            <div>
-                <button type="submit">Submit</button>
+            <div class="d-flex justify-content-end">
+                <button type="reset" class="btn btn-secondary ml-2">Reset</button>
+                <button type="submit" class="btn btn-primary ml-2">Submit</button>
             </div>
         </form>
     </div>
 
-<div class="footer">
-    copyRight 2023
 
-</div>
-<script src="autoslideshow.js"></script>
-
+    <div class="footer mt-5">
+        © 2023 News Application
+    </div>
+    <script>
+        if(document.getElementById('msg1')) {
+            setTimeout(()=>{
+            document.getElementById('msg1').style.display = 'none'
+        },3000) 
+        }
+    </script>
 </body>
 </html>

@@ -22,24 +22,26 @@
         <li><a href="/contactUs">Contact Us</a></li>
     </ol>
 </div>
-<div class="cardsHolder">
-    <%for(let i=0; i<data.length;i++){%>    
-        <div class="m-2">
-            <div class="card" style="width: 18rem;">
-                <img src=<%= data[i].urlToImage %> class="card-img-top" alt="...">
-                <div class="card-body">
-                  <div class="card-title bold"><%=data[i].title %></div>
-                  <p class="card-text"><%=data[i].content %></p>
+<div class="ml-5 pb-5">
+    <div class="cardsHolder">
+        <%for(let i=0; i<data.length;i++){%>    
+            <div class="m-2">
+                <div class="card" style="width: 20rem;">
+                    <img src=<%= data[i].urlToImage %> class="card-img-top" style="height: 150px;">
+                    <div class="card-body" style="min-height: 290px;">
+                    <div class="card-title bold"><%=data[i].title %></div>
+                    <p class="card-text"><%=data[i].content %></p>
+                    </div>
                 </div>
-              </div>
-        </div>
-    
-    <%}%>
+            </div>
+        
+        <%}%>
+    </div>
 </div>
 
 
-<div class="footer">
-    copyRight 2023
+<div class="footer mt-5">
+    © 2023 News Application
 </div>
 <body>
 <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
