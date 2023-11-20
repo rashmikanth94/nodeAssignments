@@ -1,0 +1,17 @@
+.navBar {
+    background-color: black;
+    color:white;
+    padding-top: 18px;
+}
+
+.navBar li {
+    list-style: none;
+    cursor: pointer;
+}
+
+.navBar ol {
+    display: inline-flex;
+    justify-content: space-between;
+    width: 100%;
+    padding-right: 35px;
+}
