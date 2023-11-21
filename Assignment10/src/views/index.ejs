@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>User Details</title>
+    <link href="/styles.css" rel="stylesheet">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+
+</head>
+<body>
+    
+    <div style="width:50%" class="m-4">
+        <form action="/getDetails" method="POST">
+            <div class="mb-2">
+                <label>Enter Username:</label>
+                <input class="form-control" name="username">
+            </div>
+            <div>
+                <button class="btn btn-primary">Fetch Details</button>
+            </div>
+        </form>
+    </div>
+
+    <div class="m-4" style="word-break: break-all;">
+        <div style="font-weight: bold; font-size: 20px;">User Details:</div>
+        <div>
+            <%=data %>
+        </div>
+    </div>
+</body>
+</html>
