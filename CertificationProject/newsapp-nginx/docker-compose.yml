@@ -1,0 +1,32 @@
+version: '3'
+services:
+
+    admin:
+        container_name: adminapplication
+        image: rashmikanth/adminapplication
+        restart: always
+        ports:
+          - "9000:9000"
+        networks:
+          - medianet
+
+    customer:
+        container_name: customerapplication
+        image: rashmikanth/customerapplication
+        restart: always
+        ports:
+          - "4000:4000"
+        networks:
+          - medianet
+
+    reverseproxy:
+        container_name: newsapp-nginx
+        image: rashmikanth/newsapp-nginx
+        ports:
+          - "80:8080"
+        networks:
+          - medianet
+
+networks:
+  medianet:
+    driver: bridge
