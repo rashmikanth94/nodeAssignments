@@ -1,8 +1,7 @@
 require('dotenv').config()
 const mongoose = require('mongoose');
 
-// mongpdb atlas database name : db_media
-const mongodb_url = 'mongodb://127.0.0.1:27017/newsApplication';
+const mongodb_url = 'mongodb+srv://rashmikanth94:F66nSTn5YwARAv8V@cluster0.rrpksui.mongodb.net/newsApplication?authSource=admin';
 
 mongoose.connect( mongodb_url, 
     { useNewUrlParser: true }).then(()=>{

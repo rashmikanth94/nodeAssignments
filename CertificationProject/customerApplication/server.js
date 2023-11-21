@@ -94,7 +94,7 @@ app.get("/", (req, res)=> {
                 const message = encodeURIComponent('Error : ', error);
                 res.redirect('/contactUs/?message=' + message)
             }else{
-                const htmlMsg = encodeURIComponent('Query Submitted Succesfully!');
+                const message = encodeURIComponent('Query Submitted Succesfully!');
                 res.redirect('/contactUs/?message=' + message)
             }
             
